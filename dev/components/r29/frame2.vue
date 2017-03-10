@@ -1,88 +1,23 @@
 <template lang="html">
     <div class="frame2">
         <div class="content-wrapper">
-            <!--<div class="title">Who are you shopping for?</div>-->
-        </div>
-        <ul class="grid-wrapper">
-            <!--<li class="person" v-for="(item, index) in personData" key="index">
-                <div class="cover-wrapper">
-                    <img :src="`image/r29/image/${item.toLowerCase()}.svg`" alt="" class="normal">
-                    <img :src="'image/r29/image/' + item.toLowerCase() + '_hover.svg'" alt="" class="hover">
-                </div>
-                <div class="name">{{ item }}</div>
-            </li>-->
+            <div class="title">Who are you shopping for?</div>
+            <ul class="grid-wrapper">
+                <li class="person" v-for="(item, index) in personData" key="index">
+                    <div class="cover-wrapper">
+                        <img :src="`image/r29/image/${item.toLowerCase()}.svg`" alt="" class="normal">
+                        <img :src="'image/r29/image/' + item.toLowerCase() + '_hover.svg'" alt="" class="hover">
+                    </div>
+                    <div class="name">{{ item }}</div>
+                </li>
 
-        </ul>
-        <div class="box"></div>
-        <ul class="projects">
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-            <li>
-                <div class="bg-placeholder">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="bg">
-                    <img src="image/picture1.png" alt="">
-                </div>
-                <div class="gradient">
-                    <img src="image/shadow.png" alt="">
-                </div>
-            </li>
-        </ul>
-        <div class="box"></div>
+            </ul>
+            <div class="btn-next disable" @click="changeFrame()">
+                <span class="text">ONWARD</span>
+            </div>
+        </div>
+        
+        
     </div>
 </template>
 
@@ -102,13 +37,16 @@ export default {
         }
     },
     methods: {
-        
+        changeFrame() {
+            this.$emit('cilckEvent')
+        }
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .frame2 {
+   
     .content-wrapper{
         position: absolute;
         top: 50%;
@@ -117,6 +55,7 @@ export default {
         max-width: 850px;
         text-align: center;
         transform: translateX(-50%) translateY(-50%);
+        
         .title{
             font-family: BrownStd-Bold;
             font-size: 22px;
@@ -124,99 +63,73 @@ export default {
             text-align: center;
             color: #ce912c;
             transform: translate3d(0,0,0);
+            
         }
-        .grid-wrapper{
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            li{
-                position: relative;
-                width: 30%;
-                margin: 1.4%;
-                cursor: pointer;
-                text-align: center;
-                .cover-wrapper{
-                    position: relative;
-                    .normal{
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        opacity: 1;
-                    }
-                    .hover{
-                        position: relative;
-                        opacity: 0;
-                        transition: opacity .2s linear;
-                    }
-                }
-            }
-        }
+        
     }
-    .box{
-        background: #000;
-        height: 300px;
-        width: 1200px;
-        margin: 0 auto;
-    }
-    .projects{
-        position: relative;
-        background-color: black;
-        max-width: 1200px;
-        margin: 0 auto;
+    .grid-wrapper{
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        
         li{
             position: relative;
-            display: inline-block;
-            overflow: hidden;
-            width: 400px;
-            vertical-align: top;
+            width: 23%;
+            margin: 1.4%;
             cursor: pointer;
-            div{
-                img{
-                    width: 100%;
-                    display: block;
-                }
-            }
-            .bg-placeholder{
+            text-align: center;
+            .cover-wrapper{
                 position: relative;
-                width: 100%;
-            }
-            .bg{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                transition: transform cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s, -webkit-transform cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s;
-            }
-            .gradient {
-                position: absolute;
-                // width: 100%;
-                height: 80%;
-                left: -2px;
-                right: -1px;
-                top: auto;
-                bottom: -1px;
-                transform: translate3d(0,0,0);
-                transition: height cubic-bezier(0.165, 0.84, 0.44, 1) 0.5;
-                img {
-                    height: 100%;
+                .normal{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    opacity: 1;
+                }
+                .hover{
+                    position: relative;
+                    opacity: 0;
+                    transition: opacity .2s linear;
+                }
+                &:hover{
+                    .hover{
+                        opacity: 1;
+                    }
                 }
             }
-            &:hover {
-                .bg {
-                    transform: scale(1.12);
-                    transition: all 0.3s ease;
-                }
-
-                .gradient {
-                    height: 200%;
-                    transition: all 0.3s ease;
-                }
+            .name{
+                font-family: BrownStd-Bold;
+                display: inline-block;
+                text-transform: uppercase;
+                font-size: 20px;
+                letter-spacing: 3px;
+                color: #ce912c;
+                padding-bottom: 12px;
+                border-bottom: 3px solid transparent;
             }
         }
     }
+    .btn-next{
+        padding: 14px 30px 12px;
+        margin-top: 5%;
+        display: inline-block;
+        text-align: center;
+        color: #ce912c;
+        border-radius: 40px;
+        transition: color .3s ease,background-color .3s ease;
+        border: 2px solid #ce912c;
+        cursor: pointer;
+        .text{
+            font-family: BrownStd-Bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+    }
+
 }
 </style>

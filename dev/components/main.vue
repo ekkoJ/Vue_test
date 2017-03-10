@@ -1,9 +1,9 @@
 <template lang="html">
     <div class="main">
         <!--<transition name="fade">-->
-            <frame1 @cilckEvent="changeFrame()" v-if="showFrame === 0"></frame1>
-            <frame2 @cilckEvent="changeFrame()" v-if="showFrame === 1"></frame2>
-            <frame3></frame3>
+            <frame1 @cilckEvent="changeFrame(1)" v-if="showFrame === 0"></frame1>
+            <frame2 @cilckEvent="changeFrame(2)" v-if="showFrame === 1"></frame2>
+            <frame3 @cilckEvent="changeFrame(3)" v-if="showFrame === 2"></frame3>
             <lastFrame></lastFrame>
         <!--</transition>-->
     </div>
@@ -29,8 +29,8 @@ export default {
         lastFrame
     },
     methods: {
-        changeFrame() {
-            ++ this.showFrame;
+        changeFrame(frame) {
+            this.showFrame = frame;
         }
     }
 }
