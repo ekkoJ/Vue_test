@@ -3,12 +3,16 @@
         <div class="content-wrapper">
             <div class="title">Who are you shopping for?</div>
             <ul class="grid-wrapper">
-                <li class="person" v-for="(item, index) in personData" key="index">
+                <li v-for="(item, index) in personData"
+                    @click="handleClickLi(index)"
+                    :class="['person', {active : selectIndex === index}]"
+                    key="index"
+                >
                     <div class="cover-wrapper">
-                        <img :src="`image/r29/image/${item.toLowerCase()}.svg`" alt="" class="normal">
-                        <img :src="'image/r29/image/' + item.toLowerCase() + '_hover.svg'" alt="" class="hover">
+                        <img :src="'image/r29/image/' + item.imgsrc + '.svg'" alt="" class="normal">
+                        <img :src="'image/r29/image/' + item.imgsrc + '_hover.svg'" alt="" class="hover">
                     </div>
-                    <div class="name">{{ item }}</div>
+                    <div class="name">{{item.name === '' ? 'surprise' : item.name }}</div>
                 </li>
 
             </ul>
@@ -16,8 +20,6 @@
                 <span class="text">ONWARD</span>
             </div>
         </div>
-        
-        
     </div>
 </template>
 
@@ -27,26 +29,51 @@ export default {
     data () {
         return {
             personData: [
-               'MOM',
-               'DAD',
-               'S.O.',
-               'BFF',
-               'WORK SPOUSE',
-               'SUPRISE'
-            ]
+               {
+                   name: 'MOM',
+                   imgsrc: 'mom',
+               },
+               {
+                   name: 'DAD',
+                   imgsrc: 'dad',
+               },
+               {
+                   name: 'S.O.',
+                   imgsrc: 'so',
+               },
+               {
+                   name: 'BFF',
+                   imgsrc: 'bff',
+               },
+               {
+                   name: 'WORK SPOUSE',
+                   imgsrc: 'ws',
+               },
+               {
+                   name: '',
+                   imgsrc: 'surprise',
+               },
+            ],
+            selectIndex: '',
         }
     },
     methods: {
         changeFrame() {
-            this.$emit('cilckEvent')
+            this.$emit('cilckEvent',2);
+            this.$emit('listenPerson',this.personData[this.selectIndex].name)
+        },
+        handleClickLi(index) {
+            this.selectIndex = index;
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
+img{
+    -webkit-user-drag: none;
+}
 .frame2 {
-   
     .content-wrapper{
         position: absolute;
         top: 50%;
@@ -55,7 +82,6 @@ export default {
         max-width: 850px;
         text-align: center;
         transform: translateX(-50%) translateY(-50%);
-        
         .title{
             font-family: BrownStd-Bold;
             font-size: 22px;
@@ -95,6 +121,14 @@ export default {
                     transition: opacity .2s linear;
                 }
                 &:hover{
+                    .hover{
+                        opacity: 1;
+                    }
+                }
+                
+            }
+            &.active{
+                .cover-wrapper{
                     .hover{
                         opacity: 1;
                     }

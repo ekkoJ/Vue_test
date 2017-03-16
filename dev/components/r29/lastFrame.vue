@@ -1,6 +1,7 @@
 <template lang="html">
-    <div class="test1">
-        
+    <div class="lastframe">
+        {{ selectType }}
+        {{ selectName }}
     </div>
 </template>
 
@@ -9,9 +10,10 @@
 export default {
     data () {
         return {
-            
+
         }
     },
+    props: ['selectType','selectName'],
     methods: {
         
     }
@@ -19,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test1 {
-    
+.lastframe {
+    font-size: 16px;
 }
 </style>

@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         changeFrame() {
-            this.$emit('cilckEvent')
+            this.$emit('cilckEvent',1)
         }
     }
 }

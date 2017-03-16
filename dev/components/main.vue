@@ -1,11 +1,11 @@
 <template lang="html">
     <div class="main">
-        <!--<transition name="fade">-->
-            <frame1 @cilckEvent="changeFrame(1)" v-if="showFrame === 0"></frame1>
-            <frame2 @cilckEvent="changeFrame(2)" v-if="showFrame === 1"></frame2>
-            <frame3 @cilckEvent="changeFrame(3)" v-if="showFrame === 2"></frame3>
-            <lastFrame></lastFrame>
-        <!--</transition>-->
+        <transition name="fade">
+            <frame1 @cilckEvent="changeFrame" v-if="showFrame === 0"></frame1>
+            <frame2 @cilckEvent="changeFrame" v-if="showFrame === 1" @listenPerson="personChange"></frame2>
+            <frame3 @cilckEvent="changeFrame" v-if="showFrame === 2" @listenType="typeChange" :select-name="selectname"></frame3>
+            <lastFrame v-if="showFrame === 3" :select-name="selectname" :select-type="selectarr"></lastFrame>
+        </transition>
     </div>
 </template>
 
@@ -16,10 +16,11 @@ import frame3 from './r29/frame3.vue';
 import lastFrame from './r29/lastFrame.vue';
 
 export default {
-    
     data () {
         return {
-            showFrame: 1,
+            showFrame: 2,
+            selectname: '',
+            selectarr: [],
         }
     },
     components: {
@@ -31,6 +32,12 @@ export default {
     methods: {
         changeFrame(frame) {
             this.showFrame = frame;
+        },
+        personChange(name) {
+            this.selectname = name;
+        },
+        typeChange(arr) {
+            this.selectarr = arr;
         }
     }
 }
@@ -44,6 +51,7 @@ export default {
     overflow: auto;
     
 }
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
