@@ -16,7 +16,7 @@
                 </li>
 
             </ul>
-            <div class="btn-next disable" @click="changeFrame()">
+            <div :class="['btn-next', {disable : selectIndex === -1}]" @click="changeFrame()">
                 <span class="text">ONWARD</span>
             </div>
         </div>
@@ -54,11 +54,12 @@ export default {
                    imgsrc: 'surprise',
                },
             ],
-            selectIndex: '',
+            selectIndex: -1,
         }
     },
     methods: {
         changeFrame() {
+            if (this.selectIndex === -1) reurn;
             this.$emit('cilckEvent',2);
             this.$emit('listenPerson',this.personData[this.selectIndex].name)
         },
@@ -161,6 +162,16 @@ img{
             font-size: 16px;
             letter-spacing: 2px;
             text-transform: uppercase;
+        }
+        &.disable{
+            opacity: 0.5;
+            cursor: default;
+        }
+        &:not(.disable) {
+            &:hover{
+                background: #ce912c;
+                color: #fff;
+            }
         }
         
     }

@@ -17,15 +17,19 @@
             <ul class="trait-list">
                 <li v-for="(item, index) in traits"
                     key="index"
+                    v-model="total"
+                    :true-value="total - 1"
+                    :false-value="total + 1"
                 >
                     
                     <label>
                         <input type="checkbox">
                         <div class="flag-box">
                             <div class="circle-container">
-                            <div class="circle"></div>
-                            <img class="circle-hover" src="image/r29/image/circle_hover.png"></div>
-                        <span class="trait">{{ item }}</span>
+                                <div class="circle"></div>
+                                <img class="circle-hover" src="image/r29/image/circle_hover.png">
+                            </div>
+                            <span class="trait">{{ item }}</span>
                         </div>
                     </label>
                 </li>
@@ -112,6 +116,11 @@ export default {
             li{
                 padding: 15px 0;
                 cursor: pointer;
+                &:hover{
+                   .trait{
+                       color: #f00;
+                   }
+                }
             }
             label{
                 width: 100%;
@@ -119,7 +128,7 @@ export default {
                 cursor: pointer;
             }
             input[type=checkbox] {
-                // display: none;
+                display: none;
             }
             input[type=checkbox] {
                 -webkit-appearance: checkbox;
@@ -131,6 +140,14 @@ export default {
                 -webkit-rtl-ordering: logical;
                 user-select: text;
                 cursor: auto;
+                &:checked+.flag-box{
+                   .circle-hover{
+                       opacity: 1;
+                   }
+                   .trait{
+                       color: #f00;
+                   }
+                }
             }
             .flag-box{
                 width: 378px;

@@ -18,7 +18,7 @@ import lastFrame from './r29/lastFrame.vue';
 export default {
     data () {
         return {
-            showFrame: 2,
+            showFrame: 0,
             selectname: '',
             selectarr: [],
         }
