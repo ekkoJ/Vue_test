@@ -17,47 +17,84 @@
             <ul class="trait-list">
                 <li v-for="(item, index) in traits"
                     key="index"
-                    v-model="total"
-                    :true-value="total - 1"
-                    :false-value="total + 1"
                 >
-                    
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox"
+                            :disabled=" total === 0 && !item.selected? true : false"
+                            @click = 'listenChecked(index)'
+                        >
                         <div class="flag-box">
                             <div class="circle-container">
                                 <div class="circle"></div>
                                 <img class="circle-hover" src="image/r29/image/circle_hover.png">
                             </div>
-                            <span class="trait">{{ item }}</span>
+                            <span class="trait">{{ item.typename }}</span>
                         </div>
                     </label>
                 </li>
             </ul>
+            <div :class="['btn-next', {disable : total != 0}]" @click="changeFrame()">
+                <span class="text">SEE GIFTS</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import $ from 'jQuery';
 export default {
     data () {
         return {
             traits: [
-                'CHILL',
-                'CHIC AESTHETE',
-                'EMO',
-                'TYPE A',
-                'EARLY ADOPTER',
-                'FANCY'
+                {
+                    typename: 'CHILL',
+                    selected: false,
+                },
+                {
+                    typename: 'CHIC AESTHETE',
+                    selected: false,
+                },
+                {
+                    typename: 'EMO',
+                    selected: false,
+                },
+                {
+                    typename: 'TYPE A',
+                    selected: false,
+                },
+                {
+                    typename: 'EARLY ADOPTER',
+                    selected: false,
+                },
+                {
+                    typename: 'FANCY',
+                    selected: false,
+                },
             ],
             total: 3,
+            traitArr:[],
         }
     },
     props: ['selectName'],
     methods: {
         backFrame() {
             this.$emit('cilckEvent',1);
+        },
+        listenChecked(index) {
+            var Arr = [];
+            this.traits[index].selected = !this.traits[index].selected;
+            this.total = this.traits[index].selected ? this.total - 1 : this.total + 1;
+            this.traits.forEach(function(item,index){
+                if (item.selected) Arr.push(item.typename);
+            })
+            this.traitArr = Arr;
+            console.log(this.traitArr)
+        },
+        changeFrame() {
+            if (this.total != 0) return;
+            
+            this.$emit('cilckEvent',3);
+            this.$emit('listenType',this.traitArr)
         }
     }
 }
@@ -186,6 +223,34 @@ export default {
                 border-bottom: 3px solid;
                 border-bottom-color: transparent;
             }
+        }
+         .btn-next{
+            padding: 14px 30px 12px;
+            margin-top: 5%;
+            display: inline-block;
+            text-align: center;
+            color: #ce912c;
+            border-radius: 40px;
+            transition: color .3s ease,background-color .3s ease;
+            border: 2px solid #ce912c;
+            cursor: pointer;
+            .text{
+                font-family: BrownStd-Bold;
+                font-size: 16px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+            &.disable{
+                opacity: 0.5;
+                cursor: default;
+            }
+            &:not(.disable) {
+                &:hover{
+                    background: #ce912c;
+                    color: #fff;
+                }
+            }
+            
         }
     }
 }
