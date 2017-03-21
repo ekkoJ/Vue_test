@@ -85,10 +85,9 @@ export default {
             this.traits[index].selected = !this.traits[index].selected;
             this.total = this.traits[index].selected ? this.total - 1 : this.total + 1;
             this.traits.forEach(function(item,index){
-                if (item.selected) Arr.push(item.typename);
+                if (item.selected) Arr.push(item.typename.toLowerCase());
             })
             this.traitArr = Arr;
-            console.log(this.traitArr)
         },
         changeFrame() {
             if (this.total != 0) return;
