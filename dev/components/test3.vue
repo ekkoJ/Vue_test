@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="test3">
-        <div id="main" class="main">
+        <div class="main">
             <h1>Services</h1>
             <ul>
                 <li v-for="(item, index) in projectData"

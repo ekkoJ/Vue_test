@@ -1,12 +1,17 @@
 <template lang="html">
     <div class="container">
-        <test1 class="disnone"></test1>
-        <test2 class="disnone"></test2>
-        <test3 class="disnone"></test3>
-        <test4 class="disnone"></test4>
-        <test5 class="disnone"></test5>
-        <FilterCom class="disnone"></FilterCom>
-        <r29></r29>
+        {components[0]}
+        <test1 v-if="showframe === 1"></test1>
+        <test2 v-if="showframe === 2"></test2>
+        <test3 v-if="showframe === 3"></test3>
+        <test4 v-if="showframe === 4"></test4>
+        <test5 v-if="showframe === 5"></test5>
+        <FilterCom v-if="showframe === 6"></FilterCom>
+        <r29 v-if="showframe === 7"></r29>
+        <div class="chooseFrame">
+         <p>show frame <input v-model="textframe" @input="textin"></input></p>
+         <p>please write the number of 1 - 7</p>
+        </div>
     </div>
 </template>
 
@@ -22,7 +27,8 @@ import r29 from './components/main.vue';
 export default {
     data () {
         return {
-            // msg: 'Hello from vue-loader!'
+            textframe: 1,
+            // comlength: components.length,
         }
     },
     components: {
@@ -33,6 +39,19 @@ export default {
         test5,
         FilterCom,
         r29,
+    },
+    computed: {
+        showframe: function(){
+            return parseInt(this.textframe);
+        }
+    },
+    methods: {
+        textin() {
+            // if (parseInt(this.textframe) > 7 || parseInt(this.textframe) < 1) {
+            //     this.textframe = this.textframe;
+            //     return;
+            // } 
+        }
     }
 }
 </script>
@@ -60,6 +79,19 @@ body {
     .container{
         width: 100%;
         height: 100%;
+    }
+}
+.chooseFrame{
+    position: fixed;
+    top: 0;
+    right: 5%;
+    p{
+        font-size:16px;
+    }
+    input{
+        width: 50px;
+        height: 50px;
+        font-size:16px;
     }
 }
 .disnone{
